@@ -15,7 +15,7 @@ class Cart extends React.Component{
             <div>
                 <h3>Cart - {this.props.summ} </h3>
                 {
-                    this.props.cart.map( item => <div key={item.id} >{item.text} - {item.price}</div>)
+                    this.props.cart.map( item => <div key={item.id} >{item.text} - {item.price} - amount : {item.amount}</div>)
                 }
             </div>
         );
