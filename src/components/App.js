@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import { Container } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import ShopList from './../containers/ShopList';
 import './style.css';
+import Filter from '../containers/Filter';
 
 class App extends Component {
 
@@ -10,7 +11,17 @@ class App extends Component {
 		return (
 			<Container>
 				<Header />
-				<ShopList />
+				<Grid className="wrapper">
+					<Grid.Row>
+						<Grid.Column width={12}>
+							<ShopList />
+						</Grid.Column>
+						<Grid.Column width={4}>
+							<Filter />
+						</Grid.Column>
+					</Grid.Row>
+				</Grid>
+
 			</Container>
 		);
 	}
