@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
 import './style.css';
-import { getItems } from '../../actions';
+import { loadArticle } from '../../actions';
 
 const mapStateToProps = store => ({
     items: store.items
 });
 const mapDispatchToProps = dispatch => ({
-    getItems: () => dispatch(getItems())
+    loadArticle: () => dispatch(loadArticle())
 })
 
 class ShopList extends Component {
 
     componentDidMount() {
-        setTimeout(
-            this.props.getItems,
-            2000
-        )
+        console.log(this.props.loadArticle)
     }
     render() {
         const { items } = this.props;

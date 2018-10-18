@@ -1,3 +1,8 @@
-export const getItems = () => ({
-    type: "HI"
-});
+export function loadArticle(){
+    return dispatch => {
+    
+    dispatch({
+    type: 'LOAD'
+    })
+}
+}
