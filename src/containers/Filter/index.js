@@ -1,38 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Label, Menu } from 'semantic-ui-react';
+import { Input, Label, Menu, Icon } from 'semantic-ui-react';
+import { setFilter, setSearch } from '../../actions';
 
 
 const mapStateToProps = store => ({
-
+    filter: store.filter.category
 });
 const mapDispatchToProps = dispatch => ({
-
+    setFilter: name => dispatch(setFilter(name)),
+    setSearch: searchQuery => dispatch(setSearch(searchQuery))
 });
 
 class Filter extends Component {
-    state = { activeItem: 'inbox' };
+    state = {
+        inputValue: ''
+    }
+    onInputChange = e => {
+        this.setState({
+            inputValue: e.currentTarget.value
+        })
+        this.props.setSearch(e.currentTarget.value)
+    }
+    handleItemClick = (e, { name }) => {
+        this.props.setFilter(name);
+    }
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-  
     render() {
-        const { activeItem } = this.state
+        const { filter } = this.props;
         return (
             <div>
                 <Menu vertical>
-                    <Menu.Item name='inbox' active={activeItem === 'inbox'} onClick={this.handleItemClick}>
-                        Inbox
+                    <Menu.Item name='All' active={filter === 'All'} onClick={this.handleItemClick}>
+                        All
                     </Menu.Item>
 
-                    <Menu.Item name='spam' active={activeItem === 'spam'} onClick={this.handleItemClick}>
-                        Spam
+                    <Menu.Item name='TV' active={filter === 'TV'} onClick={this.handleItemClick}>
+                        TV
                     </Menu.Item>
 
-                    <Menu.Item name='updates' active={activeItem === 'updates'} onClick={this.handleItemClick}>
-                        Updates
+                    <Menu.Item name='Phones' active={filter === 'Phones'} onClick={this.handleItemClick}>
+                        Phones
                     </Menu.Item>
                     <Menu.Item>
-                        <Input icon='search' placeholder='Search mail...' />
+                        <div className="ui input">
+                            <input placeholder="Search..." type="text" value={this.state.inputValue} onChange={this.onInputChange} />
+                        </div>
                     </Menu.Item>
                 </Menu>
             </div>

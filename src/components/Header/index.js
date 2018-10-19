@@ -10,7 +10,7 @@ const Header = () => (
                         <Menu.Item>Cart</Menu.Item>
                         
                     </Menu.Menu>
-                </Menu>    
+                </Menu>   
             </div>
             );
 
