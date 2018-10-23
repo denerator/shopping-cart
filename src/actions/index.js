@@ -1,5 +1,5 @@
 import products from './../API/items.json';
-import { LOADING, SUCCES, SET_FILTER, SET_SEARCH } from '../constans/ActionTypes.js';
+import { LOADING, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART } from '../constans/ActionTypes.js';
 
 export const loadArticle = () => dispatch => {
 
@@ -22,4 +22,12 @@ export const setFilter = (name) => ({
 export const setSearch = searchQuery => ({
     type: SET_SEARCH,
     payload: searchQuery
-})
+});
+export const addToCart = item => ({
+    type: ADD_TO_CART,
+    payload: item
+});
+export const deleteFromCart = cartItem => ({
+    type: DELETE_FROM_CART,
+    payload: cartItem
+});

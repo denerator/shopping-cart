@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Icon, Dimmer, Loader, Image, Segment, Container } from 'semantic-ui-react';
 import './style.css';
-import { loadArticle } from '../../actions';
+import { loadArticle, addToCart } from '../../actions';
+import ShopItem from '../../components/ShopItem';
 
 const mapStateToProps = store => ({
     items: store.items          //Check for elements and then filter them
@@ -14,11 +15,14 @@ const mapStateToProps = store => ({
         : null         
 });
 const mapDispatchToProps = dispatch => ({
-    loadArticle: dispatch(loadArticle())
+    loadArticle: dispatch(loadArticle()),
+    addToCart: item => dispatch(addToCart(item))
 })
 
 class ShopList extends Component {
-
+    addToCart = (item) => {
+        this.props.addToCart( item );
+    }
     componentDidMount() {
         !this.props.items && this.props.loadArticle;
     }
@@ -40,21 +44,15 @@ class ShopList extends Component {
                             ?   <Card.Group itemsPerRow={4}>
                                     {
                                         items.map(item =>
-                                            <Card key={item.id} >
-                                                <Card.Content>
-                                                    <Card.Header>{item.text}</Card.Header>
-                                                    <Card.Meta>
-                                                        <span className='date'>{item.category}</span>
-                                                    </Card.Meta>
-                                                    <Card.Description><Icon name='dollar' />{item.price}</Card.Description>
-                                                </Card.Content>
-                                                <Card.Content extra>
-                                                    <a>
-                                                        <Icon name='user' />
-                                                        You have no Friends
-                                            </a>
-                                                </Card.Content>
-                                            </Card>)
+                                            <ShopItem
+                                                key = { item.id } 
+                                                text = { item.text } 
+                                                category = { item.category }
+                                                price = { item.price }
+                                                addToCart = { this.addToCart } 
+                                                item = { item }
+                                                />
+                                            )
                                     }
                                 </Card.Group>
                             : <Container textAlign='center'><h2>Nothing Found :(</h2></Container>

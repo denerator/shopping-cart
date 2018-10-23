@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Label, Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { setFilter, setSearch } from '../../actions';
 
 
@@ -43,8 +43,9 @@ class Filter extends Component {
                         Phones
                     </Menu.Item>
                     <Menu.Item>
-                        <div className="ui input">
+                        <div className="ui icon input">
                             <input placeholder="Search..." type="text" value={this.state.inputValue} onChange={this.onInputChange} />
+                            <Icon name="search" />
                         </div>
                     </Menu.Item>
                 </Menu>

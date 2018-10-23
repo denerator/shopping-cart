@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import Header from './../containers/Header';
 import { Container, Grid } from 'semantic-ui-react';
 import ShopList from './../containers/ShopList';
 import './style.css';
