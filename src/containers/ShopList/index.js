@@ -12,7 +12,8 @@ const mapStateToProps = store => ({
                 .filter( item => item.text.toLowerCase().includes( store.filter.search.toLowerCase()) ) 
             : store.items.filter( item => item.category == store.filter.category)
                 .filter( item => item.text.toLowerCase().includes( store.filter.search.toLowerCase()) )
-        : null         
+        : null ,
+    cart: store.cart.cart        
 });
 const mapDispatchToProps = dispatch => ({
     loadArticle: dispatch(loadArticle()),
@@ -27,7 +28,7 @@ class ShopList extends Component {
         !this.props.items && this.props.loadArticle;
     }
     render() {
-        const { items } = this.props;
+        const { items, cart } = this.props;
         return (
             <div>
                 {
@@ -45,12 +46,10 @@ class ShopList extends Component {
                                     {
                                         items.map(item =>
                                             <ShopItem
-                                                key = { item.id } 
-                                                text = { item.text } 
-                                                category = { item.category }
-                                                price = { item.price }
+                                                { ...item }
                                                 addToCart = { this.addToCart } 
                                                 item = { item }
+                                                cart={cart}
                                                 />
                                             )
                                     }

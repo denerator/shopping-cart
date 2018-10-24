@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Icon, Button } from 'semantic-ui-react';
 
-const ShopItem = ( { text, category, price, addToCart, item } ) => {
-
+const ShopItem = ( { text, id, category, price, addToCart, item, cart } ) => {
+    const count = cart.reduce( (count,current) => count + ( id == current.id ? 1 : 0 ), 0)
     return (
         <Card>
             <Card.Content>
@@ -18,7 +18,7 @@ const ShopItem = ( { text, category, price, addToCart, item } ) => {
                     You have no Friends
                 </a>
             </Card.Content>
-            <Button onClick={ () => addToCart(item) } >Add to cart</Button>
+            <Button onClick={ () => addToCart(item) } >Add to cart { count ? <span>({ count })</span> : '' }</Button>
         </Card>
     );
 };
