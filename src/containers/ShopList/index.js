@@ -13,7 +13,7 @@ const mapStateToProps = store => ({
             : store.items.filter( item => item.category == store.filter.category)
                 .filter( item => item.text.toLowerCase().includes( store.filter.search.toLowerCase()) )
         : null ,
-    cart: store.cart.cart        
+    cart: store.cart        
 });
 const mapDispatchToProps = dispatch => ({
     loadArticle: dispatch(loadArticle()),

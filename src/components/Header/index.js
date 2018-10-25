@@ -2,13 +2,12 @@ import React from 'react';
 import { Menu, Icon, Popup, List, Button } from 'semantic-ui-react';
 import './style.css';
 
-const CartComponent = ({ text, price, id, deleteItem, cart }) => {
-    const count = cart.reduce( (counter, current ) => counter + ( id == current.id ? 1 : 0), 0);
+const CartComponent = ({ text, price, id, deleteItem }) => {
     return (
         <li className="cart-item" >
             <span>{text} - {price} - </span>
             <Icon name='dollar' />
-            <span>{count}</span>
+            <span></span>
             <Button onClick={() => deleteItem({ id, price })} >Delete</Button>
         </li>
     );
