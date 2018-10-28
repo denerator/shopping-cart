@@ -25,7 +25,7 @@ const Header = ({ total, cart, deleteFromCart }) => (
                     on='click'
                     content={
                         cart.length
-                            ? cart.map(item => <CartComponent deleteItem={deleteFromCart} cart = {cart} {...item} />)
+                            ? cart.map(item => <CartComponent key={ item.id } deleteItem={deleteFromCart} cart = {cart} {...item} />)
                             : <h4>Nothing is here yet</h4>
                     }
                     position='bottom right'

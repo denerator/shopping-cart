@@ -5,26 +5,21 @@ import ShopList from './../containers/ShopList';
 import './style.css';
 import Filter from '../containers/Filter';
 
-class App extends Component {
+const App = () => (
+	<Container>
+		<Header />
+		<Grid className="wrapper">
+			<Grid.Row>
+				<Grid.Column width={12}>
+					<ShopList />
+				</Grid.Column>
+				<Grid.Column width={4}>
+					<Filter />
+				</Grid.Column>
+			</Grid.Row>
+		</Grid>
 
-	render() {
-		return (
-			<Container>
-				<Header />
-				<Grid className="wrapper">
-					<Grid.Row>
-						<Grid.Column width={12}>
-							<ShopList />
-						</Grid.Column>
-						<Grid.Column width={4}>
-							<Filter />
-						</Grid.Column>
-					</Grid.Row>
-				</Grid>
-
-			</Container>
-		);
-	}
-}
+	</Container>
+)
 
 export default App;
