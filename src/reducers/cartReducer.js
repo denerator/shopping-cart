@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
                 ...state, action.payload
             ]
         case DELETE_FROM_CART:
-            return state.filter(item => item.id !== action.payload.id);
+            return state.filter(item => item.id !== action.payload);
         default:
             return state;
     }

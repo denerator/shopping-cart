@@ -1,4 +1,3 @@
-import products from './../API/items.json';
 import { LOADING, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART } from '../constans/ActionTypes.js';
 
 export const loadArticle = () => dispatch => {
@@ -27,7 +26,7 @@ export const addToCart = item => ({
     type: ADD_TO_CART,
     payload: item
 });
-export const deleteFromCart = cartItem => ({
+export const deleteFromCart = id => ({
     type: DELETE_FROM_CART,
-    payload: cartItem
+    payload: id
 });

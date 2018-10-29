@@ -1,14 +1,12 @@
 import React from 'react';
-import { Menu, Icon, Popup, List, Button } from 'semantic-ui-react';
+import { Menu, Icon, Popup, Button } from 'semantic-ui-react';
 import './style.css';
 
 const CartComponent = ({ text, price, id, deleteItem }) => {
     return (
         <li className="cart-item" >
-            <span>{text} - {price} - </span>
-            <Icon name='dollar' />
-            <span></span>
-            <Button onClick={() => deleteItem({ id, price })} >Delete</Button>
+            <span>{text} - {price}<Icon name='dollar' /></span>
+            <Button onClick={() => deleteItem(id)} >Delete</Button>
         </li>
     );
 
@@ -25,9 +23,10 @@ const Header = ({ total, cart, deleteFromCart }) => (
                     on='click'
                     content={
                         cart.length
-                            ? cart.map(item => <CartComponent key={ item.id } deleteItem={deleteFromCart} cart = {cart} {...item} />)
+                            ? <ul>{cart.map(item => <CartComponent key={item.id} deleteItem={deleteFromCart} cart={cart} {...item} />)}</ul>
                             : <h4>Nothing is here yet</h4>
                     }
+                    className="cart_popup"
                     position='bottom right'
                 />
             </Menu.Menu>

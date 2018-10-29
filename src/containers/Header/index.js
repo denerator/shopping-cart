@@ -10,7 +10,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    deleteFromCart: cartItem => dispatch(deleteFromCart(cartItem))
+    deleteFromCart: id => dispatch(deleteFromCart(id))
 });
 
 

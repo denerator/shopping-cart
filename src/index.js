@@ -9,9 +9,8 @@ import App from './components/App';
 import rootReducer from './reducers';
 import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ItemInfo from './components/ItemInfo';
 import NotFound from './components/NotFound';
-
+import ItemInfo from './containers/ItemInfo';
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 
