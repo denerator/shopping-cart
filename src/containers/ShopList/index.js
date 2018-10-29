@@ -4,7 +4,6 @@ import { Card, Icon, Dimmer, Loader, Image, Segment, Container } from 'semantic-
 import './style.css';
 import { loadArticle, addToCart } from '../../actions';
 import ShopItem from '../../components/ShopItem';
-import { Link } from 'react-router-dom';
 
 const mapStateToProps = store => ({
     items: store.items          //Check for elements and then filter them
@@ -58,7 +57,6 @@ class ShopList extends Component {
                                 </Card.Group>
                             : <Container textAlign='center'><h2>Nothing Found :(</h2></Container>
                 }
-                <Link to="/header">header</Link>
             </div>
         );
     }

@@ -9,7 +9,8 @@ import App from './components/App';
 import rootReducer from './reducers';
 import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './containers/Header';
+import ItemInfo from './components/ItemInfo';
+import NotFound from './components/NotFound';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -20,7 +21,8 @@ ReactDOM.render(
 		<Router>
 			<Switch>
 				<Route exact path='/' component={App} />
-				<Route path='/header' component={Header} />
+				<Route path='/item/:itemId' component={ItemInfo} />
+				<Route path='/*' component={NotFound} />
 			</Switch>
 		</Router>
 	</Provider>,
