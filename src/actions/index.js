@@ -5,13 +5,13 @@ export const loadArticle = () => dispatch => {
     dispatch({
         type: LOADING,
     });
-    // fetch('https://api.myjson.com/bins/iegmw')
-    //     .then(response => response.json())
-    //     .then(response => dispatch({
-    //         type: SUCCES,
-    //         payload: response
-    //     }))
-    //     .catch(error => console.log(error))
+    fetch('https://api.myjson.com/bins/iegmw')
+        .then(response => response.json())
+        .then(response => dispatch({
+            type: SUCCES,
+            payload: response
+        }))
+        .catch(error => console.log(error))
 }
 
 export const setFilter = (name) => ({
