@@ -1,6 +1,6 @@
 import { LOADING, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART } from '../constans/ActionTypes.js';
 
-export const loadArticle = () => dispatch => {
+export const loadItems = () => dispatch => {
 
     dispatch({
         type: LOADING,

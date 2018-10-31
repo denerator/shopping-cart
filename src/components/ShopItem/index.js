@@ -3,7 +3,7 @@ import { Card, Icon, Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom" ;
 
 const ShopItem = ( { text, id, category, price, addToCart, item, cart } ) => {
-    const count = cart.reduce( (count,current) => count + ( id == current.id ? 1 : 0 ), 0)
+    const count = cart.reduce( (count,current) => count + ( id === current.id ? 1 : 0 ), 0)
     return (
         <Card>
             <Card.Content>
