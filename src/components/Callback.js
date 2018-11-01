@@ -1,10 +1,12 @@
 import React from 'react';
-
+import { Segment, Dimmer, Loader } from 'semantic-ui-react';
 const Callback = () => {
     return (
-        <div>
-            Hi
-        </div>
+        <Segment className="preloader">
+            <Dimmer active inverted >
+                <Loader>Loading</Loader>
+            </Dimmer>
+        </Segment>
     );
 };
 
