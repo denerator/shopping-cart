@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 import { setFilter, setSearch } from '../../actions';
 
-
 const mapStateToProps = store => ({
     filter: store.filter.category
 });

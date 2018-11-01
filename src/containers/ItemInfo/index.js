@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
-import Header from '../../containers/Header';
+import Header from '../Header';
 
 const mapStateToProps = (store, ownProps) => ({
-    item: store.items.find(item => item.id == parseInt(ownProps.match.params.itemId))
+    item: store.items.find(item => item.id === parseInt(ownProps.match.params.itemId, 10)),
 });
 
 
@@ -13,10 +13,12 @@ const ItemInfo = ({ item }) => (
         <Header />
         <div>
             <h2>
-                Name : {item.text}
+                Name : 
+                {item.text}
             </h2>
             <h4>
-                Category: {item.category}
+                Category:
+                {item.category}
             </h4>
             <h3>
                 Price: {item.price}<Icon name="dollar" />
@@ -24,6 +26,4 @@ const ItemInfo = ({ item }) => (
         </div>
     </Container>
 );
-
-
 export default connect(mapStateToProps)(ItemInfo);
