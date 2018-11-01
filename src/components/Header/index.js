@@ -12,11 +12,35 @@ const CartComponent = ({ text, price, id, deleteItem }) => {
 
 };
 
-const Header = ({ total, cart, deleteFromCart }) => (
+const Header = ({ total, cart, deleteFromCart, auth, login, logout }) => (
     <div>
         <Menu>
             <Menu.Item>Online store</Menu.Item>
             <Menu.Menu position="right" >
+                <Menu.Item>
+                    {
+                        !auth.isAuthenticated() && (
+                            <Button
+                                bsStyle="primary"
+                                className="btn-margin"
+                                onClick={login}
+                            >
+                                Log In
+                  </Button>
+                        )
+                    }
+                    {
+                        auth.isAuthenticated() && (
+                            <Button
+                                bsStyle="primary"
+                                className="btn-margin"
+                                onClick={logout}
+                            >
+                                Log Out
+                  </Button>
+                        )
+                    }
+                </Menu.Item>
                 <Menu.Item>Total: {total} <Icon name="dollar" /> </Menu.Item>
                 <Popup
                     trigger={<Menu.Item>Cart {cart.length ? <span>({cart.length})</span> : ''}</Menu.Item>}

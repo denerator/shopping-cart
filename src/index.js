@@ -12,22 +12,34 @@ import { Router, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ItemInfo from './containers/ItemInfo';
 import history from './history';
-import Callback  from './components/Callback';
+import Callback from './components/Callback';
+import Auth from './Auth/Auth';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
+const auth = new Auth();
 
+const handleAuthentication = (nextState, replace) => {
+	if (/access_token|id_token|error/.test(nextState.location.hash)) {
+		auth.handleAuthentication();
+	}
+}
+
+const renderCallback = props => {
+	handleAuthentication(props);
+	return <Callback {...props} />
+}
 
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
 			<Switch>
-				<Route exact path='/' component={App} />
+				<Route exact path='/' render={ props => <App auth={auth} { ...props } />} />
 				<Route path='/item/:itemId' component={ItemInfo} />
-				<Route path="/callback" component={Callback}/>
-				{/* <Route path='/*' component={NotFound} /> */}
+				<Route path="/callback" render={ renderCallback} />
+					{/* <Route path='/*' component={NotFound} /> */ }
 			</Switch>
 		</Router>
 	</Provider>,
-	document.getElementById('root')
-);
+		document.getElementById('root')
+	);
