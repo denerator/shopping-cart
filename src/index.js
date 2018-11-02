@@ -8,12 +8,13 @@ import thunk from 'redux-thunk';
 import App from './components/App';
 import rootReducer from './reducers';
 import 'semantic-ui-css/semantic.min.css';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ItemInfo from './containers/ItemInfo';
 import history from './history';
-import Callback from './components/Callback';
+import Callback from './components/Callback/';
 import Auth from './Auth/Auth';
+import Profile from './components/Profile';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -37,6 +38,7 @@ ReactDOM.render(
 				<Route exact path='/' render={ props => <App auth={auth} { ...props } />} />
 				<Route path='/item/:itemId' component={ItemInfo} />
 				<Route path="/callback" render={ renderCallback} />
+				<Route path='/profile' render={ props => ( !auth.isAuthenticated() ? ( <Redirect to='/' /> ) : ( <Profile auth={auth} {...props} /> ) )} />
 					{/* <Route path='/*' component={NotFound} /> */ }
 			</Switch>
 		</Router>

@@ -13,3 +13,6 @@
 .ui.popup.cart_popup{
     max-width: none;
 }
+.right.menu .item.authorization *{
+    margin-right: 10px !important;
+}
