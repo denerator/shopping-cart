@@ -25,69 +25,15 @@ const CartComponent = ({ text, price, id, deleteItem }) => {
 
 };
 class Header extends React.Component {
-    state = {
-        profile: null
-    }
-    componentWillMount() {
-        if (this.props.auth.isAuthenticated()) {
-            this.setState({ profile: {} });
-            const { userProfile, getProfile } = this.props.auth;
-            if (!userProfile) {
-                getProfile((err, profile) => {
-                    this.setState({ profile });
-                });
-            } else {
-                this.setState({ profile: userProfile });
-            }
-        }
-    }
-    logout = () => {
-        this.props.logout();
-        this.setState({
-            profile: null
-        })
-    }
     render() {
-        const { total, cart, deleteFromCart, auth, login, logout } = this.props;
-        const { profile } = this.state;
+        const { total, cart, deleteFromCart } = this.props;
         return (
             <div>
                 <Menu>
                     <Menu.Item>Online store</Menu.Item>
                     <Menu.Menu position="right" >
                         <Menu.Item className="authorization">
-                            {
-                                profile
-                                    ? (
-                                        <React.Fragment>
-                                            <img src={profile.picture} alt='profile' />
-                                            <span>{profile.nickname}</span>
-                                        </React.Fragment>
-                                    )
-                                    : (
-                                        <span>Hi, Guest</span>
-                                    )
-                            }
-                            {
-                                !auth.isAuthenticated() && (
-                                    <Button
-                                        className="btn-margin"
-                                        onClick={login}
-                                    >
-                                        Log In
-                      </Button>
-                                )
-                            }
-                            {
-                                auth.isAuthenticated() && (
-                                    <Button
-                                        className="btn-margin"
-                                        onClick={this.logout}
-                                    >
-                                        Log Out
-                      </Button>
-                                )
-                            }
+                            
                         </Menu.Item>
                         <Menu.Item>Total: {total} <Icon name="dollar" /> </Menu.Item>
                         <Popup
