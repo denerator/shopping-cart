@@ -37,11 +37,12 @@ const authListener = () => {
 class Header extends React.Component {
     componentDidMount() {
         fire.auth().onAuthStateChanged( user => {
-            console.log( user );
+            console.log( user.email );
         });
-        fetch(`http://api.ipstack.com/check?access_key=${API_KEY}`)
+        fetch(`https://ipapi.co/json/`)
             .then( responce => responce.json())
-            .then( responce => this.props.setLang( responce.country_name === 'Ukraine' || 'Russia' ? 'RU' : 'EN' ))
+            .then( responce => this.props.setLang((responce.country_name === 'Ukraine' || responce.country_name === 'Russia') ? 'RU' : 'EN'  ))
+                
     }
     setLang = (e, {name}) => {
         this.props.setLang(name);
