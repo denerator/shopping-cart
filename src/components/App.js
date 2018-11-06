@@ -4,14 +4,15 @@ import { Container, Grid, Button } from 'semantic-ui-react';
 import ShopList from './../containers/ShopList';
 import './style.css';
 import Filter from '../containers/Filter';
+import fire from '../Firebase';
+import SignIn from './SignIn';
 
 
 class App extends Component {
-	
 	render() {
 		return (
 			<Container>
-				<Header/>
+				<Header />
 				<Grid className="wrapper">
 					<Grid.Row>
 						<Grid.Column width={12}>
@@ -22,9 +23,9 @@ class App extends Component {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-
 			</Container>
 		)
 	}
 }
+
 export default App;

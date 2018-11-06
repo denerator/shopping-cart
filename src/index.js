@@ -12,6 +12,9 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ItemInfo from './containers/ItemInfo';
 import history from './history';
+import registerServiceWorker from './registerServiceWorker';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -22,9 +25,12 @@ ReactDOM.render(
 			<Switch>
 				<Route exact path='/' component={ App} />
 				<Route path='/item/:itemId' component={ItemInfo} />
-					{/* <Route path='/*' component={NotFound} /> */ }
+				<Route path='/signin' component={SignIn} />
+				<Route path='/signup' component={SignUp} />
+				<Route path='/*' component={NotFound} />
 			</Switch>
 		</Router>
 	</Provider>,
 		document.getElementById('root')
 	);
+registerServiceWorker();

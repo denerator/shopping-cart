@@ -5,3 +5,4 @@ export const SUCCES = 'SUCCES';
 export const SET_FILTER = 'SET_FITLER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
+export const SET_LANG = 'SET_LANG';

@@ -1,4 +1,4 @@
-import { LOADING, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART } from '../constans/ActionTypes.js';
+import { LOADING, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART, SET_LANG } from '../constans/ActionTypes.js';
 
 export const loadItems = () => dispatch => {
 
@@ -29,4 +29,8 @@ export const addToCart = item => ({
 export const deleteFromCart = id => ({
     type: DELETE_FROM_CART,
     payload: id
+});
+export const setLang = lang => ({
+    type: SET_LANG,
+    payload: lang
 });
