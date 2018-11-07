@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import fire from '../../Firebase';
 import { Link } from 'react-router-dom';
 import history from '../../history';
+import {connect} from 'react-redux';
+import { setUser } from '../../actions';
+
+const mapStateToProps = store => ({
+    user: store.user,
+});
+const mapDispatchToProps = dispatch => ({
+    setUser: user => dispatch( setUser(user) ),
+});
 
 const byPropKey = (key, value) => ({
     [key]: value
@@ -19,19 +28,23 @@ class SignIn extends Component {
         this.state = INITIAL_STATE;
     }
     onSubmit = e => {
-        const { email, password } = this.state; 
+        const { email, password } = this.state;
         e.preventDefault();
-        fire.auth().signInWithEmailAndPassword( email, password ) 
-            .then( u => console.log( u ))
-            .catch( err => console.log(err))
-        this.setState({...INITIAL_STATE});
-        history.push('/');
+        fire.auth().signInWithEmailAndPassword(email, password)
+            .then(user => {
+                this.props.setUser(user.user);
+                console.log(user);
+                this.setState({ ...INITIAL_STATE });
+                history.push('/');
+            })
+            .catch(error => this.setState({error}))
+
     }
     render() {
         const { email, password, error } = this.state;
         const isInvalid =
             password === '' ||
-            email === '' ;
+            email === '';
         return (
             <div>
                 <h2>Sign In</h2>
@@ -59,4 +72,4 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+export default connect( mapStateToProps, mapDispatchToProps ) (SignIn);

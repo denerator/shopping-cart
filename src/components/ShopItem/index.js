@@ -11,7 +11,7 @@ const ShopItem = ( { text, id, category, price, addToCart, item, cart } ) => {
                 <Card.Meta>
                     <span className='date'>{category}</span>
                 </Card.Meta>
-                <Card.Description><Icon name='dollar' />{price}</Card.Description>
+                <Card.Description>{price} <Icon name='dollar' /></Card.Description>
             </Card.Content>
             <Card.Content extra>
                 <Link to={`/item/${id}`} >More info...</Link>

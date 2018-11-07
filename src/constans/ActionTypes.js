@@ -1,8 +1,10 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const SET_ITEMS = 'SET_ITEMS';
-export const LOADING = 'LOADING';
+export const LOADING_ITEMS = 'LOADING_ITEMS';
 export const SUCCES = 'SUCCES';
 export const SET_FILTER = 'SET_FITLER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
+export const FETCHING_IP = 'FETCHING_IP';
 export const SET_LANG = 'SET_LANG';
+export const SET_USER ='SET_USER';

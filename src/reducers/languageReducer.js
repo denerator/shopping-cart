@@ -1,11 +1,13 @@
-import { SET_LANG } from "../constans/ActionTypes";
+import { FETCHING_IP, SUCCES, SET_LANG } from "../constans/ActionTypes";
 
 const initialState = 'EN';
 
 export default function( state = initialState, action ) {
     switch( action.type ) {
-        case SET_LANG :
+        case `${FETCHING_IP}_${SUCCES}` :
             return action.payload
+        case SET_LANG :
+            return action.payload    
         default :
             return state;
     }

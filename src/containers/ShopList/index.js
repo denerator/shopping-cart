@@ -5,18 +5,24 @@ import './style.css';
 import { loadItems, addToCart } from '../../actions';
 import ShopItem from '../../components/ShopItem';
 
-const mapStateToProps = store => ({
-    items: store.items          //Check for elements and then filter them
+const itemsProvider = store => {
+    return (
+    store.items          //Check for elements and then filter them
         ? store.filter.category === 'All'
             ? store.items
                 .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
             : store.items.filter(item => item.category === store.filter.category)
                 .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
-        : null,
+        : null
+    )
+}
+
+const mapStateToProps = store => ({
+    items: itemsProvider(store) ,
     cart: store.cart
 });
 const mapDispatchToProps = dispatch => ({
-    loadItems: dispatch(loadItems()),
+    loadItems:() => dispatch(loadItems()) ,
     addToCart: item => dispatch(addToCart(item))
 })
 
@@ -25,7 +31,7 @@ class ShopList extends Component {
         this.props.addToCart(item);
     }
     componentDidMount() {
-        !this.props.items && this.props.loadItems;
+        !this.props.items && this.props.loadItems();
     }
     render() {
         const { items, cart } = this.props;
@@ -33,11 +39,11 @@ class ShopList extends Component {
             <div>
                 {
                     !items
-                        ? ( <Segment className="preloader">
+                        ? (<Segment className="preloader">
                             <Dimmer active inverted >
                                 <Loader>Loading</Loader>
                             </Dimmer>
-                        </Segment> )
+                        </Segment>)
                         : items.length
                             ? <Card.Group itemsPerRow={4}>
                                 {

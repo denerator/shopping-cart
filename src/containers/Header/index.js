@@ -1,23 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 //import Header from './../../components/Header';
-import { deleteFromCart, setLang } from '../../actions';
+import { deleteFromCart, setLang, loadItems, fetchIP } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
 import { Menu, Icon, Popup, Button } from 'semantic-ui-react';
 import fire from '../../Firebase';
 import { Link } from "react-router-dom" ;
-import { API_KEY } from '../../constans/API'
 
 
 const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
     cart: uniqBy(store.cart, item => item.id),
-    lang: store.language
+    lang: store.language,
+    user: store.user
 });
 const mapDispatchToProps = dispatch => ({
     deleteFromCart: id => dispatch(deleteFromCart(id)),
-    setLang: lang => dispatch(setLang(lang))
+    setLang: lang => dispatch(setLang(lang)),
+    loadItems:() => dispatch(loadItems()),
+    fetchIP: () => dispatch(fetchIP()),
 });
 
 const CartComponent = ({ text, price, id, deleteItem }) => {
@@ -37,18 +39,15 @@ const authListener = () => {
 class Header extends React.Component {
     componentDidMount() {
         fire.auth().onAuthStateChanged( user => {
-            console.log( user.email );
+            console.log( user );
         });
-        fetch(`https://ipapi.co/json/`)
-            .then( responce => responce.json())
-            .then( responce => this.props.setLang((responce.country_name === 'Ukraine' || responce.country_name === 'Russia') ? 'RU' : 'EN'  ))
-                
+        this.props.fetchIP();
     }
     setLang = (e, {name}) => {
         this.props.setLang(name);
     }
     render() {
-        const { total, cart, deleteFromCart, lang } = this.props;
+        const { total, cart, deleteFromCart, lang, user } = this.props;
         return (
             <div>
                 <Menu>
@@ -61,7 +60,11 @@ class Header extends React.Component {
                             </Menu>
                         </Menu.Item>
                         <Menu.Item className="authorization">
-                            <Link to='/signin' >Sign In</Link>
+                            {
+                                user 
+                                    ? <span>{ user.email } <Button >Sign Out</Button></span>
+                                    : <Link to='/signin' >Sign In</Link>
+                            }
                         </Menu.Item>
                         <Menu.Item>Total: {total} <Icon name="dollar" /> </Menu.Item>
                         <Popup
