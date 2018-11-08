@@ -9,6 +9,8 @@
 # production
 /build
 
+# API key
+/src/Firebase
 # misc
 .DS_Store
 .env.local
