@@ -6,26 +6,35 @@ import './style.css';
 import Filter from '../containers/Filter';
 import fire from '../Firebase';
 import SignIn from './SignIn';
+import { connect } from 'react-redux';
+import { IntlProvider, FormattedMessage } from 'react-intl'
+import messages from '../messages';
 
+const mapStateToProps = store => ({
+	lang: store.language
+})
 
 class App extends Component {
 	render() {
+		const { lang } = this.props;
 		return (
-			<Container>
-				<Header />
-				<Grid className="wrapper">
-					<Grid.Row>
-						<Grid.Column width={12}>
-							<ShopList />
-						</Grid.Column>
-						<Grid.Column width={4}>
-							<Filter />
-						</Grid.Column>
-					</Grid.Row>
-				</Grid>
-			</Container>
+			<IntlProvider locale={lang} messages={messages[lang]}>
+				<Container>
+					<Header />
+					<Grid className="wrapper">
+						<Grid.Row>
+							<Grid.Column width={12}>
+								<ShopList />
+							</Grid.Column>
+							<Grid.Column width={4}>
+								<Filter />
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
+				</Container>
+			</IntlProvider>
 		)
 	}
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

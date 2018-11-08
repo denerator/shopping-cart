@@ -15,6 +15,12 @@ import history from './history';
 import registerServiceWorker from './registerServiceWorker';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import { addLocaleData } from 'react-intl';
+import EN from 'react-intl/locale-data/en';
+import RU from 'react-intl/locale-data/ru';
+
+addLocaleData(EN);
+addLocaleData(RU);
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 

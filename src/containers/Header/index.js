@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import Header from './../../components/Header';
 import { deleteFromCart, setLang, loadItems, fetchIP } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
 import { Menu, Icon, Popup, Button } from 'semantic-ui-react';
 import fire from '../../Firebase';
 import { Link } from "react-router-dom" ;
+import { FormattedMessage } from 'react-intl';
 
 
 const mapStateToProps = store => ({
@@ -51,7 +51,7 @@ class Header extends React.Component {
         return (
             <div>
                 <Menu>
-                    <Menu.Item>Online store</Menu.Item>
+                    <Menu.Item><FormattedMessage id="site.name" defaultMessage="Online store" /></Menu.Item>
                     <Menu.Menu position="right" >
                         <Menu.Item>
                             <Menu>
@@ -66,9 +66,9 @@ class Header extends React.Component {
                                     : <Link to='/signin' >Sign In</Link>
                             }
                         </Menu.Item>
-                        <Menu.Item>Total: {total} <Icon name="dollar" /> </Menu.Item>
+                        <Menu.Item><FormattedMessage id="cart.total" defaultMessage="Total" /> : {total} <Icon name="dollar" /> </Menu.Item>
                         <Popup
-                            trigger={<Menu.Item>Cart {cart.length ? <span>({cart.length})</span> : ''}</Menu.Item>}
+                            trigger={<Menu.Item><FormattedMessage id="cart.title" defaultMessage="Cart" /> {cart.length ? <span>({cart.length})</span> : ''}</Menu.Item>}
                             on='click'
                             content={
                                 cart.length

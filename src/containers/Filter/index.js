@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 import { setFilter, setSearch } from '../../actions';
+import { FormattedMessage } from 'react-intl';
 
 const mapStateToProps = store => ({
     filter: store.filter.category
@@ -31,7 +32,7 @@ class Filter extends Component {
             <div>
                 <Menu vertical>
                     <Menu.Item name='All' active={filter === 'All'} onClick={this.handleItemClick}>
-                        All
+                        <FormattedMessage id="filter.all" defaultMessage="All" />
                     </Menu.Item>
 
                     <Menu.Item name='TV' active={filter === 'TV'} onClick={this.handleItemClick}>
@@ -39,7 +40,7 @@ class Filter extends Component {
                     </Menu.Item>
 
                     <Menu.Item name='Phones' active={filter === 'Phones'} onClick={this.handleItemClick}>
-                        Phones
+                        <FormattedMessage id="filter.phones" defaultMessage="Phones" />
                     </Menu.Item>
                     <Menu.Item>
                         <div className="ui icon input">

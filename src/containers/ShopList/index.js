@@ -19,7 +19,8 @@ const itemsProvider = store => {
 
 const mapStateToProps = store => ({
     items: itemsProvider(store) ,
-    cart: store.cart
+    cart: store.cart,
+    lang: store.language
 });
 const mapDispatchToProps = dispatch => ({
     loadItems:() => dispatch(loadItems()) ,
@@ -34,7 +35,7 @@ class ShopList extends Component {
         !this.props.items && this.props.loadItems();
     }
     render() {
-        const { items, cart } = this.props;
+        const { items, cart, lang } = this.props;
         return (
             <div>
                 {
@@ -54,6 +55,7 @@ class ShopList extends Component {
                                             item={item}
                                             cart={cart}
                                             key={item.id}
+                                            lang={lang}
                                         />
                                     )
                                 }
