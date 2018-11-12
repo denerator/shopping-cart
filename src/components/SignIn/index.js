@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fire from '../../Firebase';
+import fire, { doSignInWithEmailAndPassword } from '../../Firebase';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import {connect} from 'react-redux';
@@ -30,10 +30,11 @@ class SignIn extends Component {
     onSubmit = e => {
         const { email, password } = this.state;
         e.preventDefault();
+        //doSignInWithEmailAndPassword(email, password);
         fire.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
-                this.props.setUser(user.user);
-                console.log(user);
+                // fire.firestore().collection("users").doc(user.user.uid).get()
+                //     .then( qs => console.log(qs.data()))
                 this.setState({ ...INITIAL_STATE });
                 history.push('/');
             })

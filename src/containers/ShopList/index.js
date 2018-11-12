@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Icon, Dimmer, Loader, Image, Segment, Container } from 'semantic-ui-react';
 import './style.css';
-import { loadItems, addToCart } from '../../actions';
+import { loadItems, addToCart, deleteItem } from '../../actions';
 import ShopItem from '../../components/ShopItem';
 
 const itemsProvider = store => {
@@ -24,7 +24,7 @@ const mapStateToProps = store => ({
 });
 const mapDispatchToProps = dispatch => ({
     loadItems:() => dispatch(loadItems()) ,
-    addToCart: item => dispatch(addToCart(item))
+    addToCart: item => dispatch(addToCart(item)),
 })
 
 class ShopList extends Component {

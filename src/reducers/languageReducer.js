@@ -1,6 +1,6 @@
 import { FETCHING_IP, SUCCES, SET_LANG } from "../constans/ActionTypes";
 
-const initialState = 'EN';
+const initialState = null;
 
 export default function( state = initialState, action ) {
     switch( action.type ) {

@@ -12,7 +12,7 @@ const ShopItem = ( { text, id, category, price, addToCart, item, cart, lang } ) 
                 <Card.Meta>
                     <span className='date'>{category}</span>
                 </Card.Meta>
-                <Card.Description>{price} <Icon name={ (lang === 'RU' ? 'rub' : 'dollar')} /></Card.Description>
+                <Card.Description>{ (lang === 'RU' ? price*66 : price) } <Icon name={ (lang === 'RU' ? 'rub' : 'dollar')} /></Card.Description>
             </Card.Content>
             <Card.Content extra>
                 <Link to={`/item/${id}`} ><FormattedMessage id="item.moreInfo" defaultMessage="More info..." />...</Link>

@@ -29,7 +29,7 @@ ReactDOM.render(
 	<Provider store={store} >
 		<Router history={history}>
 			<Switch>
-				<Route exact path='/' component={ App} />
+				<Route exact path='/' component={App} />
 				<Route path='/item/:itemId' component={ItemInfo} />
 				<Route path='/signin' component={SignIn} />
 				<Route path='/signup' component={SignUp} />

@@ -1,4 +1,4 @@
-import { LOADING_ITEMS, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART, SET_LANG, FETCHING_IP, SET_USER } from '../constans/ActionTypes';
+import { LOADING_ITEMS, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART, SET_LANG, FETCHING_IP, SET_USER, ADD_ITEM, DELETE_ITEM } from '../constans/ActionTypes';
 export const loadItems = () => dispatch => {
     dispatch({
         type: LOADING_ITEMS,
@@ -49,3 +49,7 @@ export const setUser = user => ({
     type: SET_USER,
     payload:user
 })
+export const addItem = item => ({
+    type: ADD_ITEM,
+    payload: item
+});

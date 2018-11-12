@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import fire from '../../Firebase';
+import fire, { doCreateUserWithEmailAndPassword } from '../../Firebase';
 import { Link } from 'react-router-dom';
 import history from '../../history';
+
 
 const byPropKey = (key, value) => ({
     [key]: value
