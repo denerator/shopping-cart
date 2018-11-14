@@ -20,14 +20,21 @@ const itemsProvider = store => {
 const mapStateToProps = store => ({
     items: itemsProvider(store) ,
     cart: store.cart,
-    lang: store.language
+    lang: store.language,
+    role: store.user.user 
+				? store.user.user.role
+				: ''
 });
 const mapDispatchToProps = dispatch => ({
     loadItems:() => dispatch(loadItems()) ,
     addToCart: item => dispatch(addToCart(item)),
+    deleteItem: id => dispatch(deleteItem(id)),
 })
 
 class ShopList extends Component {
+    deleteItem = id => {
+        this.props.deleteItem(id);
+    }
     addToCart = (item) => {
         this.props.addToCart(item);
     }
@@ -35,7 +42,7 @@ class ShopList extends Component {
         !this.props.items && this.props.loadItems();
     }
     render() {
-        const { items, cart, lang } = this.props;
+        const { items, cart, lang, role } = this.props;
         return (
             <div>
                 {
@@ -56,6 +63,8 @@ class ShopList extends Component {
                                             cart={cart}
                                             key={item.id}
                                             lang={lang}
+                                            role={role}
+                                            deleteItem={(id) => this.props.deleteItem(id)}
                                         />
                                     )
                                 }

@@ -3,7 +3,7 @@ import { Card, Icon, Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom" ;
 import { FormattedMessage } from 'react-intl';
 
-const ShopItem = ( { text, id, category, price, addToCart, item, cart, lang } ) => {
+const ShopItem = ( { text, id, category, price, addToCart, item, cart, lang, deleteItem, role } ) => {
     const count = cart.reduce( (count,current) => count + ( id === current.id ? 1 : 0 ), 0)
     return (
         <Card>
@@ -17,6 +17,11 @@ const ShopItem = ( { text, id, category, price, addToCart, item, cart, lang } ) 
             <Card.Content extra>
                 <Link to={`/item/${id}`} ><FormattedMessage id="item.moreInfo" defaultMessage="More info..." />...</Link>
             </Card.Content>
+            {
+                role === 'admin'
+                    ? <button onClick={() => deleteItem(id)}>Delete Item</button>
+                    : ''
+            }
             <Button onClick={ () => addToCart(item) } ><FormattedMessage id="item.addBtn" defaultMessage="Add to cart" /> { count ? <span>({ count })</span> : '' }</Button>
         </Card>
     );
