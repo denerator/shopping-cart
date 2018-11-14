@@ -37,8 +37,8 @@ class Header extends React.Component {
         fire.auth().onAuthStateChanged(user => {
             user
                 ? fire.firestore().collection("users").doc(user.uid).get()
-                    .then(qs => {                      
-                        this.props.setUser({...user, role: qs.data().role}) 
+                    .then(qs => {                            
+                        this.props.setUser({...user, role: (qs.data() ? qs.data().role : 'user' )}) 
                     })
                 : this.props.setUser(user)
 
