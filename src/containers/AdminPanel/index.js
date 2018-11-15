@@ -39,7 +39,7 @@ class AdminPanel extends Component {
         e.preventDefault();
         const item = {
             id: +Date.now(),
-            text: inputCategory,
+            text: inputTitle,
             category: inputCategory,
             price: inputPrice
         };
