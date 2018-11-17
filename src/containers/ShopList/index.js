@@ -7,26 +7,26 @@ import ShopItem from '../../components/ShopItem';
 
 const itemsProvider = store => {
     return (
-    store.items          //Check for elements and then filter them
-        ? store.filter.category === 'All'
-            ? store.items
-                .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
-            : store.items.filter(item => item.category === store.filter.category)
-                .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
-        : null
+        store.items          //Check for elements and then filter them
+            ? store.filter.category === 'All'
+                ? store.items
+                    .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
+                : store.items.filter(item => item.category === store.filter.category)
+                    .filter(item => item.text.toLowerCase().includes(store.filter.search.toLowerCase()))
+            : null
     )
 }
 
 const mapStateToProps = store => ({
-    items: itemsProvider(store) ,
+    items: itemsProvider(store),
     cart: store.cart,
     lang: store.language,
-    role: store.user.user 
-				? store.user.user.role
-				: ''
+    role: store.user.user
+        ? store.user.user.role
+        : ''
 });
 const mapDispatchToProps = dispatch => ({
-    loadItems:() => dispatch(loadItems()) ,
+    loadItems: () => dispatch(loadItems()),
     addToCart: item => dispatch(addToCart(item)),
     deleteItem: id => dispatch(deleteItem(id)),
 })
@@ -40,6 +40,9 @@ class ShopList extends Component {
     }
     componentDidMount() {
         !this.props.items && this.props.loadItems();
+    }
+    componentDidUpdate() {
+        this.props.items && localStorage.setItem('localItems', JSON.stringify(this.props.items));
     }
     render() {
         const { items, cart, lang, role } = this.props;
