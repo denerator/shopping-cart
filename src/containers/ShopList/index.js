@@ -53,7 +53,7 @@ class ShopList extends Component {
                             </Dimmer>
                         </Segment>)
                         : items.length
-                            ? <Card.Group itemsPerRow={4}>
+                            ? <Card.Group className="shoplist" >
                                 {
                                     items.map(item =>
                                         <ShopItem

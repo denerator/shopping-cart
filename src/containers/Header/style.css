@@ -16,3 +16,13 @@
 .right.menu .item.authorization *{
     margin-right: 10px !important;
 }
+.header, .right, .cart, .logo {
+    display: flex;
+    justify-content: space-between;
+}
+header  * {
+    margin-right: 20px;
+}
+button.active {
+    text-decoration: underline;
+}

@@ -12,7 +12,6 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ItemInfo from './containers/ItemInfo';
 import history from './history';
-import registerServiceWorker from './registerServiceWorker';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { addLocaleData } from 'react-intl';
@@ -39,4 +38,3 @@ ReactDOM.render(
 	</Provider>,
 		document.getElementById('root')
 	);
-registerServiceWorker();

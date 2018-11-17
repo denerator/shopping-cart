@@ -58,9 +58,9 @@ class AdminPanel extends Component {
                 {
                     this.state.isOpened
                         ? <form>
-                            <label>Title :<input value={this.state.input} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" /></label>
-                            <label>Category: <input value={this.state.input} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" /></label>
-                            <label>price: <input value={this.state.input} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" /></label>
+                            <label>Title :<input value={this.state.inputTitle} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" /></label>
+                            <label>Category: <input value={this.state.inputCategory} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" /></label>
+                            <label>price: <input value={this.state.inputPrice} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" /></label>
 
                             <button disabled={this.validator()} type="submit" onClick={this.onSubmit}>Add</button>
                         </form>

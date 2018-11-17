@@ -12,7 +12,30 @@ const mapDispatchToProps = dispatch => ({
     setSearch: searchQuery => dispatch(setSearch(searchQuery))
 });
 
-class Filter extends Component {
+export class CategoryFilter extends Component {
+    handleItemClick = (e, { name }) => {
+        this.props.setFilter(name);
+    }
+    render() {
+        const { filter } = this.props;
+        return (
+            <React.Fragment>
+                <Menu.Item name='All' active={filter === 'All'} onClick={this.handleItemClick}>
+                    <FormattedMessage id="filter.all" defaultMessage="All" />
+                </Menu.Item>
+
+                <Menu.Item name='TV' active={filter === 'TV'} onClick={this.handleItemClick}>
+                    TV
+                    </Menu.Item>
+
+                <Menu.Item name='Phones' active={filter === 'Phones'} onClick={this.handleItemClick}>
+                    <FormattedMessage id="filter.phones" defaultMessage="Phones" />
+                </Menu.Item>
+            </React.Fragment>
+        );
+    }
+}
+export class InputFilter extends Component {
     state = {
         inputValue: ''
     }
@@ -22,34 +45,26 @@ class Filter extends Component {
         })
         this.props.setSearch(e.currentTarget.value)
     }
-    handleItemClick = (e, { name }) => {
-        this.props.setFilter(name);
+    render() {
+        return (
+            <Menu.Item>
+                <div className="ui icon input">
+                    <input placeholder="Search..." type="text" value={this.state.inputValue} onChange={this.onInputChange} />
+                    <Icon name="search" />
+                </div>
+            </Menu.Item>
+        );
     }
+}
+
+class Filter extends Component {
 
     render() {
-        const { filter } = this.props;
         return (
-            <div>
-                <Menu vertical>
-                    <Menu.Item name='All' active={filter === 'All'} onClick={this.handleItemClick}>
-                        <FormattedMessage id="filter.all" defaultMessage="All" />
-                    </Menu.Item>
-
-                    <Menu.Item name='TV' active={filter === 'TV'} onClick={this.handleItemClick}>
-                        TV
-                    </Menu.Item>
-
-                    <Menu.Item name='Phones' active={filter === 'Phones'} onClick={this.handleItemClick}>
-                        <FormattedMessage id="filter.phones" defaultMessage="Phones" />
-                    </Menu.Item>
-                    <Menu.Item>
-                        <div className="ui icon input">
-                            <input placeholder="Search..." type="text" value={this.state.inputValue} onChange={this.onInputChange} />
-                            <Icon name="search" />
-                        </div>
-                    </Menu.Item>
-                </Menu>
-            </div>
+            <Menu vertical>
+                <CategoryFilter filter={this.props.filter} setFilter={this.props.setFilter} />
+                <InputFilter setSearch={this.props.setSearch} />
+            </Menu>
         );
     }
 }

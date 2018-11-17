@@ -2,11 +2,12 @@ import React from 'react';
 import { Card, Icon, Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom" ;
 import { FormattedMessage } from 'react-intl';
+import './style.css';
 
 const ShopItem = ( { text, id, category, price, addToCart, item, cart, lang, deleteItem, role } ) => {
     const count = cart.reduce( (count,current) => count + ( id === current.id ? 1 : 0 ), 0)
     return (
-        <Card>
+        <Card className="item">
             <Card.Content>
                 <Card.Header>{text}</Card.Header>
                 <Card.Meta>
