@@ -53,7 +53,7 @@ class Header extends React.Component {
         const { total, cart, deleteFromCart, lang, user, sidebarState, show, hide } = this.props;
         return (
             <div className="header">
-                <Responsive maxWidth={585}>
+                <Responsive maxWidth={984}>
                     {
                         sidebarState
                             ? <Button onClick={hide}>
@@ -68,7 +68,7 @@ class Header extends React.Component {
                     <FormattedMessage id="site.name" defaultMessage="Online store" />
                 </div>
                 <div className="right">
-                    <Responsive minWidth={585} >
+                    <Responsive className="right" minWidth={585} >
                         <div className="lang">
                             <button className={(lang === 'EN' ? 'active' : '')} onClick={() => this.setLang('EN')} name="EN" active={lang === 'EN'} >EN</button>|
                             <button className={(lang === 'RU' ? 'active' : '')} onClick={() => this.setLang('RU')} name="RU" active={lang === 'RU'}>RU</button>
@@ -76,7 +76,7 @@ class Header extends React.Component {
                         <div className="auth">
                             {
                                 user
-                                    ? <span><Responsive minWidth={768}>{user.email}</Responsive><button onClick={doSignOut} ><Icon name='log out' /></button></span>
+                                    ? <Responsive minWidth={768}>{user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
                                     : <Link to='/signin' >Sign In</Link>
                             }
                         </div>
@@ -97,7 +97,7 @@ class Header extends React.Component {
                                             cart={cart}
                                             {...item} />
                                     )}</ul>
-                                    : <h4>Nothing is here yet</h4>
+                                    : <h4><FormattedMessage defaultMessage="Nothing is here yet" id="cart.message" /></h4>
                             }
                             className="cart_popup"
                             position='bottom right'

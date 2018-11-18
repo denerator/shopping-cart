@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../../actions';
+import { Responsive, Icon } from 'semantic-ui-react';
 
 const mapStateToProps = store => ({
     items: store.items
@@ -54,7 +55,11 @@ class AdminPanel extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.visibilityToggle}>add item</button>
+                {
+                    this.state.isOpened
+                        ? <button className="floatBtn" onClick={this.visibilityToggle}>-</button>
+                        : <button className="fixed floatBtn" onClick={this.visibilityToggle}>+</button>
+                }
                 {
                     this.state.isOpened
                         ? <form>

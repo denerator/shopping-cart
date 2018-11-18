@@ -5,10 +5,13 @@ export const loadItems = () => dispatch => {
     });
     fetch('https://api.myjson.com/bins/iegmw')
         .then(response => response.json())
-        .then(response => dispatch({
-            type: `${LOADING_ITEMS}_${SUCCES}`,
-            payload: response
-        }))
+        .then(response => {
+            dispatch({
+                type: `${LOADING_ITEMS}_${SUCCES}`,
+                payload: response
+            });
+            localStorage.setItem('localItems', JSON.stringify(response))
+        })
         .catch(error => console.log(error));
 };
 export const setFilter = (name) => ({

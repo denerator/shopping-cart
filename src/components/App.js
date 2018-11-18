@@ -34,8 +34,8 @@ class App extends Component {
 		accordeonState: false
 	}
 	handleItemClick = (e, { name }) => {
-        this.props.setFilter(name);
-    }
+		this.props.setFilter(name);
+	}
 	handleAccordeonClick = () => {
 		this.setState({
 			accordeonState: !this.state.accordeonState
@@ -68,30 +68,30 @@ class App extends Component {
 							width='thin'
 						>
 							<Menu.Item className="sidebar-header"><FormattedMessage id="site.name" defaultMessage="Online store" /></Menu.Item>
-								<Menu.Item className="input-container" >
-									<InputFilter setSearch={this.props.setSearch} />
-								</Menu.Item>
-								<Menu.Item>
-									<Accordion>
-										<Accordion.Title onClick={this.handleAccordeonClick}>
-											<Icon name='dropdown' />Category: {filter}
-										</Accordion.Title>
-										<Accordion.Content active={accordeonState}>
-											<CategoryFilter filter={filter} setFilter={this.props.setFilter} />
-										</Accordion.Content>
-									</Accordion>
-								</Menu.Item>
-								<Menu.Item>
-									<button onClick={() => this.setLang('EN')} name="EN" active={lang === 'EN'} >EN</button>|
-                            		<button onClick={() => this.setLang('RU')} name="RU" active={lang === 'RU'}>RU</button>
-								</Menu.Item>
-								<Menu.Item className="authorization">
-									{
-										user
-											? <span>{user.email}<button onClick={doSignOut} ><Icon name='log out' /></button></span>
-											: <Link to='/signin' >Sign In</Link>
-									}
-								</Menu.Item>
+							<Menu.Item className="input-container" >
+								<InputFilter setSearch={this.props.setSearch} />
+							</Menu.Item>
+							<Menu.Item>
+								<Accordion>
+									<Accordion.Title onClick={this.handleAccordeonClick}>
+										<Icon name='dropdown' />Category: {filter}
+									</Accordion.Title>
+									<Accordion.Content active={accordeonState}>
+										<CategoryFilter filter={filter} setFilter={this.props.setFilter} />
+									</Accordion.Content>
+								</Accordion>
+							</Menu.Item>
+							<Menu.Item>
+								<button className={(lang === 'EN' ? 'active' : '')} onClick={() => this.setLang('EN')} name="EN" active={lang === 'EN'} >EN</button>|
+                            	<button className={(lang === 'RU' ? 'active' : '')} onClick={() => this.setLang('RU')} name="RU" active={lang === 'RU'}>RU</button>
+							</Menu.Item>
+							<Menu.Item className="authorization">
+								{
+									user
+										? <span>{user.email}<button onClick={doSignOut} ><Icon name='log out' /></button></span>
+										: <Link to='/signin' >Sign In</Link>
+								}
+							</Menu.Item>
 						</Sidebar>
 						<Sidebar.Pusher className="main-content" dimmed={visible}>
 							<Container>
@@ -101,23 +101,22 @@ class App extends Component {
 										<Grid.Column computer={12} mobile={16} >
 											<ShopList />
 										</Grid.Column>
-										<Responsive minWidth={515} >
-											<Grid.Column computer={4} >
+										<Grid.Column computer={4} >
+											<Responsive minWidth={984} >
 												<Filter />
-												{
-													role === 'admin'
-														? <AdminPanel />
-														: ''
-												}
-											</Grid.Column>
-										</Responsive>	
+											</Responsive>
+										</Grid.Column>
 									</Grid.Row>
 								</Grid>
 							</Container>
 						</Sidebar.Pusher>
 					</Sidebar.Pushable>
+					{
+						role === 'admin'
+							? <AdminPanel />
+							: ''
+					}
 				</div>
-
 			</IntlProvider >
 		)
 	}

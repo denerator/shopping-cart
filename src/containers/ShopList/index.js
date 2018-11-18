@@ -4,6 +4,7 @@ import { Card, Icon, Dimmer, Loader, Image, Segment, Container } from 'semantic-
 import './style.css';
 import { loadItems, addToCart, deleteItem } from '../../actions';
 import ShopItem from '../../components/ShopItem';
+import { FormattedMessage } from 'react-intl';
 
 const itemsProvider = store => {
     return (
@@ -41,9 +42,6 @@ class ShopList extends Component {
     componentDidMount() {
         !this.props.items && this.props.loadItems();
     }
-    componentDidUpdate() {
-        this.props.items && localStorage.setItem('localItems', JSON.stringify(this.props.items));
-    }
     render() {
         const { items, cart, lang, role } = this.props;
         return (
@@ -72,7 +70,7 @@ class ShopList extends Component {
                                     )
                                 }
                             </Card.Group>
-                            : <Container textAlign='center'><h2>Nothing Found :(</h2></Container>
+                            : <Container textAlign='center'><h2><FormattedMessage id="serviceText.nothingFound" defaultMessage="Nothing Found" /> :(</h2></Container>
                 }
             </div>
         );

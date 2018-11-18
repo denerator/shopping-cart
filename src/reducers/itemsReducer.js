@@ -1,9 +1,9 @@
 import { SUCCES, LOADING_ITEMS, ADD_ITEM, DELETE_ITEM } from "../constans/ActionTypes";
-let initialState;
+let initialState = null;
 if (localStorage.getItem('localItems') !== null) {
     initialState = JSON.parse(localStorage.getItem('localItems'))
 } else {
-    const initialState = null;
+    initialState = null;
 }
 export default function (state = initialState, action) {
     switch (action.type) {
