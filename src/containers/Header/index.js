@@ -12,7 +12,7 @@ import { doSignOut } from '../../Firebase';
 const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
     cart: store.cart,  //uniqBy(store.cart, item => item.id),
-    lang: store.language,
+    lang: store.language.lang,
     user: store.user.user
 });
 const mapDispatchToProps = dispatch => ({
@@ -65,7 +65,7 @@ class Header extends React.Component {
                     }
                 </Responsive>
                 <div className="logo">
-                    <FormattedMessage id="site.name" defaultMessage="Online store" />
+                    <Link to="/"><FormattedMessage id="site.name" defaultMessage="Online store" /></Link>
                 </div>
                 <div className="right">
                     <Responsive className="right" minWidth={585} >
@@ -76,7 +76,7 @@ class Header extends React.Component {
                         <div className="auth">
                             {
                                 user
-                                    ? <Responsive minWidth={768}>{user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
+                                    ? <Responsive minWidth={768}>{user.displayName ? `Hi, ${user.displayName}` : user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
                                     : <Link to='/signin' >Sign In</Link>
                             }
                         </div>

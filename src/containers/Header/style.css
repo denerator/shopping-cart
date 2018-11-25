@@ -19,6 +19,13 @@
 .header, .right, .cart, .logo {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.header {
+    margin-bottom: 20px;
+}
+.total {
+    margin-right: 10px;
 }
 .right > * {
     margin-right: 20px;
@@ -26,6 +33,10 @@
 button.active {
     text-decoration: underline;
 }
+.logo a {
+    color: rgba(0,0,0,.85);
+}
+
 .floatBtn {
     width: 56px;
     height: 56px;

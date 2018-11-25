@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
 import Header from '../Header';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = (store, ownProps) => ({
     item: store.items.find(item => item.id === parseInt(ownProps.match.params.itemId, 10)),
@@ -11,7 +12,8 @@ const mapStateToProps = (store, ownProps) => ({
 const ItemInfo = ({ item }) => (
     <Container>
         <Header />
-        <div>
+        <div className="item-info">
+            <Link to="/"><Icon name="arrow left" />Home</Link>
             <h2>
                 Name : 
                 {item.text}

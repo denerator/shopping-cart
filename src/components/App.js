@@ -15,7 +15,7 @@ import { setLang, setSearch, setFilter } from '../actions';
 
 const mapStateToProps = store => ({
 	filter: store.filter.category,
-	lang: store.language,
+	lang: store.language.lang,
 	user: store.user.user,
 	role: store.user.user
 		? store.user.user.role
@@ -88,7 +88,7 @@ class App extends Component {
 							<Menu.Item className="authorization">
 								{
 									user
-										? <span>{user.email}<button onClick={doSignOut} ><Icon name='log out' /></button></span>
+										? <span>{user.displayName ? `Hi, ${user.displayName}` : user.email}<button onClick={doSignOut} ><Icon name='log out' /></button></span>
 										: <Link to='/signin' >Sign In</Link>
 								}
 							</Menu.Item>

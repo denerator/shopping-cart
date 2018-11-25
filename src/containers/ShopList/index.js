@@ -21,7 +21,7 @@ const itemsProvider = store => {
 const mapStateToProps = store => ({
     items: itemsProvider(store),
     cart: store.cart,
-    lang: store.language,
+    lang: store.language.lang,
     role: store.user.user
         ? store.user.user.role
         : ''
