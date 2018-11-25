@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { deleteFromCart, setLang, loadItems, fetchIP, setUser } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
-import { Menu, Icon, Popup, Button, Responsive } from 'semantic-ui-react';
+import { Icon, Popup, Button, Responsive } from 'semantic-ui-react';
 import fire from '../../Firebase';
 import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';

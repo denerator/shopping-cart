@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Icon, Dimmer, Loader, Image, Segment, Container } from 'semantic-ui-react';
+import { Card, Dimmer, Loader, Segment, Container } from 'semantic-ui-react';
 import './style.css';
 import { loadItems, addToCart, deleteItem } from '../../actions';
 import ShopItem from '../../components/ShopItem';

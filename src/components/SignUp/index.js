@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fire, { doCreateUserWithEmailAndPassword } from '../../Firebase';
+import fire from '../../Firebase';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 

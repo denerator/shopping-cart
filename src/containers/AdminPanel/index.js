@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../../actions';
-import { Responsive, Icon } from 'semantic-ui-react';
 
 const mapStateToProps = store => ({
     items: store.items

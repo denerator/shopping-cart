@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Header from './../containers/Header';
-import { Container, Grid, Button, Sidebar, Icon, Menu, Responsive, Accordion } from 'semantic-ui-react';
+import { Container, Grid, Sidebar, Icon, Menu, Responsive, Accordion } from 'semantic-ui-react';
 import ShopList from './../containers/ShopList';
 import './style.css';
 import Filter, { CategoryFilter, InputFilter } from '../containers/Filter';
-import fire, { doSignOut } from '../Firebase';
-import SignIn from './SignIn';
+import { doSignOut } from '../Firebase';
 import { connect } from 'react-redux';
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import messages from '../messages';
