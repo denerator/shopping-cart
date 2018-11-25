@@ -1,109 +1,110 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import Header from './../../components/Header';
-import { deleteFromCart } from '../../actions';
+import { deleteFromCart, setLang, loadItems, fetchIP, setUser } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
-import { Menu, Icon, Popup, Button } from 'semantic-ui-react';
+import { Menu, Icon, Popup, Button, Responsive } from 'semantic-ui-react';
+import fire from '../../Firebase';
+import { Link } from "react-router-dom";
+import { FormattedMessage } from 'react-intl';
+import { doSignOut } from '../../Firebase';
 
 const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
-    cart: uniqBy(store.cart, item => item.id)
+    cart: store.cart,  //uniqBy(store.cart, item => item.id),
+    lang: store.language.lang,
+    user: store.user.user
 });
-
 const mapDispatchToProps = dispatch => ({
-    deleteFromCart: id => dispatch(deleteFromCart(id))
+    deleteFromCart: id => dispatch(deleteFromCart(id)),
+    setLang: lang => dispatch(setLang(lang)),
+    loadItems: () => dispatch(loadItems()),
+    fetchIP: () => dispatch(fetchIP()),
+    setUser: user => dispatch(setUser(user)),
 });
 
-const CartComponent = ({ text, price, id, deleteItem }) => {
+const CartComponent = ({ text, price, id, deleteItem, cart }) => {
+    const amount = cart.reduce((cnt, current) => cnt + (current.id === id ? 1 : 0), 0);
     return (
         <li className="cart-item" >
-            <span>{text} - {price}<Icon name='dollar' /></span>
+            <span>{text} - {price}<Icon name='dollar' /> x{amount}</span>
             <Button onClick={() => deleteItem(id)} >Delete</Button>
         </li>
     );
 
 };
 class Header extends React.Component {
-    state = {
-        profile: null
+    componentDidMount() {
+        fire.auth().onAuthStateChanged(user => {
+            user
+                ? fire.firestore().collection("users").doc(user.uid).get()
+                    .then(qs => {
+                        this.props.setUser({ ...user, role: (qs.data() ? qs.data().role : 'user') })
+                    })
+                : this.props.setUser(user)
+
+        });
+        !this.props.lang && this.props.fetchIP();
     }
-    componentWillMount() {
-        if (this.props.auth.isAuthenticated()) {
-            this.setState({ profile: {} });
-            const { userProfile, getProfile } = this.props.auth;
-            if (!userProfile) {
-                getProfile((err, profile) => {
-                    this.setState({ profile });
-                });
-            } else {
-                this.setState({ profile: userProfile });
-            }
-        }
-    }
-    logout = () => {
-        this.props.logout();
-        this.setState({
-            profile: null
-        })
+    setLang = (lang) => {
+        this.props.setLang(lang);
     }
     render() {
-        const { total, cart, deleteFromCart, auth, login, logout } = this.props;
-        const { profile } = this.state;
+        const { total, cart, deleteFromCart, lang, user, sidebarState, show, hide } = this.props;
         return (
-            <div>
-                <Menu>
-                    <Menu.Item>Online store</Menu.Item>
-                    <Menu.Menu position="right" >
-                        <Menu.Item className="authorization">
+            <div className="header">
+                <Responsive maxWidth={984}>
+                    {
+                        sidebarState
+                            ? <Button onClick={hide}>
+                                <Icon name="close" />
+                            </Button>
+                            : <Button onClick={show}>
+                                <Icon name="bars" />
+                            </Button>
+                    }
+                </Responsive>
+                <div className="logo">
+                    <Link to="/"><FormattedMessage id="site.name" defaultMessage="Online store" /></Link>
+                </div>
+                <div className="right">
+                    <Responsive className="right" minWidth={585} >
+                        <div className="lang">
+                            <button className={(lang === 'EN' ? 'active' : '')} onClick={() => this.setLang('EN')} name="EN" active={lang === 'EN'} >EN</button>|
+                            <button className={(lang === 'RU' ? 'active' : '')} onClick={() => this.setLang('RU')} name="RU" active={lang === 'RU'}>RU</button>
+                        </div>
+                        <div className="auth">
                             {
-                                profile
-                                    ? (
-                                        <React.Fragment>
-                                            <img src={profile.picture} alt='profile' />
-                                            <span>{profile.nickname}</span>
-                                        </React.Fragment>
-                                    )
-                                    : (
-                                        <span>Hi, Guest</span>
-                                    )
+                                user
+                                    ? <Responsive minWidth={768}>{user.displayName ? `Hi, ${user.displayName}` : user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
+                                    : <Link to='/signin' >Sign In</Link>
                             }
-                            {
-                                !auth.isAuthenticated() && (
-                                    <Button
-                                        className="btn-margin"
-                                        onClick={login}
-                                    >
-                                        Log In
-                      </Button>
-                                )
-                            }
-                            {
-                                auth.isAuthenticated() && (
-                                    <Button
-                                        className="btn-margin"
-                                        onClick={this.logout}
-                                    >
-                                        Log Out
-                      </Button>
-                                )
-                            }
-                        </Menu.Item>
-                        <Menu.Item>Total: {total} <Icon name="dollar" /> </Menu.Item>
+                        </div>
+                    </Responsive>
+                    <div className="cart">
+                        <div className="total">
+                            {total} <Icon name={(lang === 'RU' ? 'rub' : 'dollar')} />
+                        </div>
                         <Popup
-                            trigger={<Menu.Item>Cart {cart.length ? <span>({cart.length})</span> : ''}</Menu.Item>}
+                            trigger={<div><Icon name='cart' /> {cart.length ? <span>({cart.length})</span> : ''}</div>}
                             on='click'
                             content={
                                 cart.length
-                                    ? <ul>{cart.map(item => <CartComponent key={item.id} deleteItem={deleteFromCart} cart={cart} {...item} />)}</ul>
-                                    : <h4>Nothing is here yet</h4>
+                                    ? <ul>{uniqBy(cart, item => item.id).map(item =>
+                                        <CartComponent
+                                            key={item.id}
+                                            deleteItem={deleteFromCart}
+                                            cart={cart}
+                                            {...item} />
+                                    )}</ul>
+                                    : <h4><FormattedMessage defaultMessage="Nothing is here yet" id="cart.message" /></h4>
                             }
                             className="cart_popup"
                             position='bottom right'
                         />
-                    </Menu.Menu>
-                </Menu>
-            </div>
+                    </div>
+                </div>
+            </div >
         );
     }
 }
