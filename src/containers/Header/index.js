@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFromCart, setLang, loadItems, fetchIP, setUser } from '../../actions';
+import { deleteFromCart, setLang, loadItems, fetchIP, setUser, setSidebarState } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
 import { Icon, Popup, Button, Responsive } from 'semantic-ui-react';
@@ -13,7 +13,8 @@ const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
     cart: store.cart,  //uniqBy(store.cart, item => item.id),
     lang: store.language.lang,
-    user: store.user.user
+    user: store.user.user,
+    sideBarState: store.sidebar.sideBarState
 });
 const mapDispatchToProps = dispatch => ({
     deleteFromCart: id => dispatch(deleteFromCart(id)),
@@ -21,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
     loadItems: () => dispatch(loadItems()),
     fetchIP: () => dispatch(fetchIP()),
     setUser: user => dispatch(setUser(user)),
+    setSidebarState: () => dispatch(setSidebarState()),
 });
 
 const CartComponent = ({ text, price, id, deleteItem, cart }) => {
@@ -50,16 +52,16 @@ class Header extends React.Component {
         this.props.setLang(lang);
     }
     render() {
-        const { total, cart, deleteFromCart, lang, user, sidebarState, show, hide } = this.props;
+        const { total, cart, deleteFromCart, lang, user, sideBarState, setSidebarState } = this.props;
         return (
             <div className="header">
                 <Responsive maxWidth={984}>
                     {
-                        sidebarState
-                            ? <Button onClick={hide}>
+                        sideBarState
+                            ? <Button>
                                 <Icon name="close" />
                             </Button>
-                            : <Button onClick={show}>
+                            : <Button onClick={setSidebarState}>
                                 <Icon name="bars" />
                             </Button>
                     }
