@@ -1,4 +1,4 @@
-import { LOADING_ITEMS, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART, SET_LANG, FETCHING_IP, SET_USER, ADD_ITEM, DELETE_ITEM } from '../constans/ActionTypes';
+import { LOADING_ITEMS, SUCCES, SET_FILTER, SET_SEARCH, ADD_TO_CART, DELETE_FROM_CART, SET_LANG, FETCHING_IP, SET_USER, ADD_ITEM, DELETE_ITEM, SET_SIDEBAR_STATE } from '../constans/ActionTypes';
 export const loadItems = () => dispatch => {
     dispatch({
         type: LOADING_ITEMS,
@@ -60,3 +60,6 @@ export const deleteItem = id => ({
     type: DELETE_ITEM,
     payload: id
 });
+export const setSidebarState = () => ({
+    type: SET_SIDEBAR_STATE
+})

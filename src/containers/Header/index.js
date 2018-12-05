@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteFromCart, setLang, loadItems, fetchIP, setUser } from '../../actions';
+import { deleteFromCart, setLang, loadItems, fetchIP, setUser, setSidebarState } from '../../actions';
 import { uniqBy } from 'lodash';
 import './style.css';
-import { Menu, Icon, Popup, Button, Responsive } from 'semantic-ui-react';
+import { Icon, Popup, Button, Responsive } from 'semantic-ui-react';
 import fire from '../../Firebase';
 import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import { doSignOut } from '../../Firebase';
 
+
 const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
     cart: store.cart,  //uniqBy(store.cart, item => item.id),
     lang: store.language.lang,
-    user: store.user.user
+    user: store.user.user,
+    sideBarState: store.sidebar.sideBarState
 });
 const mapDispatchToProps = dispatch => ({
     deleteFromCart: id => dispatch(deleteFromCart(id)),
@@ -21,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
     loadItems: () => dispatch(loadItems()),
     fetchIP: () => dispatch(fetchIP()),
     setUser: user => dispatch(setUser(user)),
+    setSidebarState: () => dispatch(setSidebarState()),
 });
 
 const CartComponent = ({ text, price, id, deleteItem, cart }) => {
@@ -34,6 +37,14 @@ const CartComponent = ({ text, price, id, deleteItem, cart }) => {
 
 };
 class Header extends React.Component {
+    state = {
+        isOpened: false
+    }
+    visibilityToggle = () => {
+        this.setState({
+            isOpened: !this.state.isOpened
+        })
+    }
     componentDidMount() {
         fire.auth().onAuthStateChanged(user => {
             user
@@ -50,16 +61,16 @@ class Header extends React.Component {
         this.props.setLang(lang);
     }
     render() {
-        const { total, cart, deleteFromCart, lang, user, sidebarState, show, hide } = this.props;
+        const { total, cart, deleteFromCart, lang, user, sideBarState, setSidebarState } = this.props;
         return (
             <div className="header">
                 <Responsive maxWidth={984}>
                     {
-                        sidebarState
-                            ? <Button onClick={hide}>
+                        sideBarState
+                            ? <Button>
                                 <Icon name="close" />
                             </Button>
-                            : <Button onClick={show}>
+                            : <Button onClick={setSidebarState}>
                                 <Icon name="bars" />
                             </Button>
                     }
@@ -77,7 +88,7 @@ class Header extends React.Component {
                             {
                                 user
                                     ? <Responsive minWidth={768}>{user.displayName ? `Hi, ${user.displayName}` : user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
-                                    : <Link to='/signin' >Sign In</Link>
+                                    : <Link to="/signin">Sign In</Link>
                             }
                         </div>
                     </Responsive>

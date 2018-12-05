@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import App from './components/App';
 import rootReducer from './reducers';
 import 'semantic-ui-css/semantic.min.css';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import ItemInfo from './containers/ItemInfo';
 import history from './history';

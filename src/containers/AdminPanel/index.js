@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../../actions';
-import { Responsive, Icon } from 'semantic-ui-react';
+import { Modal, Button } from 'semantic-ui-react';
+import './style.css';
 
 const mapStateToProps = store => ({
     items: store.items
@@ -36,7 +37,7 @@ class AdminPanel extends Component {
         }
     }
     onSubmit = (e) => {
-        const { inputCategory, inputTitle, inputPrice } = this.state;
+        const { inputCategory, inputTitle, inputPrice, isOpened } = this.state;
         e.preventDefault();
         const item = {
             id: +Date.now(),
@@ -50,28 +51,29 @@ class AdminPanel extends Component {
             inputTitle: '',
             inputCategory: '',
             inputPrice: '',
+            isOpened: !isOpened,
         })
     }
     render() {
         return (
-            <div>
-                {
+            <Modal
+                className="new-item-modal ui card "
+                trigger={
                     this.state.isOpened
                         ? <button className="floatBtn" onClick={this.visibilityToggle}>-</button>
                         : <button className="fixed floatBtn" onClick={this.visibilityToggle}>+</button>
                 }
-                {
-                    this.state.isOpened
-                        ? <form>
-                            <label>Title :<input value={this.state.inputTitle} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" /></label>
-                            <label>Category: <input value={this.state.inputCategory} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" /></label>
-                            <label>price: <input value={this.state.inputPrice} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" /></label>
-
-                            <button disabled={this.validator()} type="submit" onClick={this.onSubmit}>Add</button>
-                        </form>
-                        : ''
-                }
-            </div>
+                open={this.state.isOpened}
+                onClose={this.visibilityToggle}
+            >
+                <Modal.Header className="form-header">Add new item </Modal.Header>
+                <form className="form">
+                    <input className="form-item" placeholder="Title" value={this.state.inputTitle} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" />
+                    <input className="form-item" placeholder="Category" value={this.state.inputCategory} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" />
+                    <input className="form-item" placeholder="Price" value={this.state.inputPrice} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" />
+                </form>
+                <Button className="form-submit" disabled={this.validator()} type="submit" onClick={this.onSubmit}>Add</Button>
+            </Modal>
         );
     }
 }
