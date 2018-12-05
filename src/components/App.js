@@ -9,7 +9,8 @@ import { IntlProvider } from 'react-intl'
 import messages from '../messages';
 import AdminPanel from '../containers/AdminPanel';
 import { setLang, setSearch, setFilter } from '../actions';
-import Sidebar from './../components/Sidebar';
+import Sidebar from './../containers/Sidebar';
+import Footer from './Footer';
 
 
 const mapStateToProps = store => ({
@@ -29,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 
 class App extends Component {
 	render() {
-		const { lang, role} = this.props;
+		const { lang, role } = this.props;
 		return (
 			<IntlProvider locale={lang} messages={messages[lang]}>
 				<div>
@@ -48,6 +49,9 @@ class App extends Component {
 									</Grid.Column>
 								</Grid.Row>
 							</Grid>
+						</Container>
+						<Container>
+							<Footer />
 						</Container>
 					</Sidebar>
 					{

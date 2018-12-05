@@ -38,28 +38,31 @@ class SignIn extends Component {
             passwordOne !== passwordTwo ||
             email === '' ;
         return (
-            <div>
-                <h2>Sign Up</h2>
-                <form onSubmit={this.onSubmit}>
+            <div className="form-wrap">
+                <h2 className="loging-header">Sign Up</h2>
+                <form onSubmit={this.onSubmit} className="form loging-form">
                     <input
+                        className="form-item"
                         value={email}
                         onChange={event => this.setState(byPropKey('email', event.target.value))}
                         type="text"
                         placeholder="Email Address"
                     />
                     <input
+                        className="form-item"
                         value={passwordOne}
                         onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
                         type="password"
                         placeholder="Password"
                     />
                     <input
+                        className="form-item"
                         value={passwordTwo}
                         onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
                         type="password"
                         placeholder="Repeat Password"
                     />
-                    <button type="submit" disabled={isInvalid}>
+                    <button className="loging-submit" type="submit" disabled={isInvalid}>
                         Sign Up
                     </button>
                     <Link to="/signin">Sign In</Link>

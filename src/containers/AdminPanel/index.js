@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../../actions';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Button } from 'semantic-ui-react';
 import './style.css';
 
 const mapStateToProps = store => ({
@@ -37,7 +37,7 @@ class AdminPanel extends Component {
         }
     }
     onSubmit = (e) => {
-        const { inputCategory, inputTitle, inputPrice } = this.state;
+        const { inputCategory, inputTitle, inputPrice, isOpened } = this.state;
         e.preventDefault();
         const item = {
             id: +Date.now(),
@@ -51,12 +51,13 @@ class AdminPanel extends Component {
             inputTitle: '',
             inputCategory: '',
             inputPrice: '',
+            isOpened: !isOpened,
         })
     }
     render() {
         return (
             <Modal
-                className="new-item-modal"
+                className="new-item-modal ui card "
                 trigger={
                     this.state.isOpened
                         ? <button className="floatBtn" onClick={this.visibilityToggle}>-</button>
@@ -65,21 +66,13 @@ class AdminPanel extends Component {
                 open={this.state.isOpened}
                 onClose={this.visibilityToggle}
             >
-                <Modal.Header>Add new item :</Modal.Header>
-                <Modal.Content>
-                    <form className="new-item-form">
-                        <div className="form-item">
-                            <label>Title :<br/><input value={this.state.inputTitle} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" /></label>
-                        </div>
-                        <div className="form-item">
-                            <label>Category: <br/><input value={this.state.inputCategory} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" /></label>
-                        </div>
-                        <div className="form-item">
-                            <label>price: <br/><input value={this.state.inputPrice} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" /></label>
-                        </div>
-                        <button disabled={this.validator()} type="submit" onClick={this.onSubmit}>Add</button>
-                    </form>
-                </Modal.Content>
+                <Modal.Header className="form-header">Add new item </Modal.Header>
+                <form className="form">
+                    <input className="form-item" placeholder="Title" value={this.state.inputTitle} onChange={(e) => this.handleInput(e, 'inputTitle')} type="text" />
+                    <input className="form-item" placeholder="Category" value={this.state.inputCategory} onChange={(e) => this.handleInput(e, 'inputCategory')} type="text" />
+                    <input className="form-item" placeholder="Price" value={this.state.inputPrice} onChange={(e) => this.handleInput(e, 'inputPrice')} type="number" />
+                </form>
+                <Button className="form-submit" disabled={this.validator()} type="submit" onClick={this.onSubmit}>Add</Button>
             </Modal>
         );
     }

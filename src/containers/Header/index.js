@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import { doSignOut } from '../../Firebase';
 
+
 const mapStateToProps = store => ({
     total: store.cart.reduce((total, current) => total + current.price, 0),
     cart: store.cart,  //uniqBy(store.cart, item => item.id),
@@ -36,6 +37,14 @@ const CartComponent = ({ text, price, id, deleteItem, cart }) => {
 
 };
 class Header extends React.Component {
+    state = {
+        isOpened: false
+    }
+    visibilityToggle = () => {
+        this.setState({
+            isOpened: !this.state.isOpened
+        })
+    }
     componentDidMount() {
         fire.auth().onAuthStateChanged(user => {
             user
@@ -79,7 +88,7 @@ class Header extends React.Component {
                             {
                                 user
                                     ? <Responsive minWidth={768}>{user.displayName ? `Hi, ${user.displayName}` : user.email} <button onClick={doSignOut} ><Icon name='log out' /></button></Responsive>
-                                    : <Link to='/signin' >Sign In</Link>
+                                    : <Link to="/signin">Sign In</Link>
                             }
                         </div>
                     </Responsive>

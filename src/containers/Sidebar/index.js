@@ -5,9 +5,9 @@ import { doSignOut } from '../../Firebase';
 import { setLang, setSearch, setFilter, setSidebarState } from '../../actions';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { CategoryFilter, InputFilter } from '../../containers/Filter';
+import { CategoryFilter, InputFilter } from '../Filter';
 
-
+//TODO: move this component into the containers
 const mapStateToProps = store => ({
 	filter: store.filter.category,
 	lang: store.language.lang,
@@ -46,7 +46,7 @@ class MainSidebar extends Component {
 	}
     render() {
         const { accordeonState } = this.state;
-		const { lang, user, filter, sidebarState, handleSidebarHide, setSideBarState} = this.props;
+		const { lang, user, filter, sidebarState, setSideBarState} = this.props;
         return (
             <div>
                 <Sidebar.Pushable >

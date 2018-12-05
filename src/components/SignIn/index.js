@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import fire, { provider } from '../../Firebase';
 import { Link } from 'react-router-dom';
 import history from '../../history';
-import {connect} from 'react-redux';
-import { setUser } from '../../actions';
 import { Icon } from 'semantic-ui-react';
-
-const mapStateToProps = store => ({
-    user: store.user,
-});
-const mapDispatchToProps = dispatch => ({
-    setUser: user => dispatch( setUser(user) ),
-});
+import './style.css';
 
 const byPropKey = (key, value) => ({
     [key]: value
@@ -30,27 +22,23 @@ class SignIn extends Component {
     }
     googleAuth = () => {
         fire.auth().signInWithPopup(provider)
-            .then( user => {
+            .then(user => {
                 console.log(user);
                 history.push('/');
             })
-            .catch( error => {
+            .catch(error => {
                 console.log(error);
             })
     }
     onSubmit = e => {
         const { email, password } = this.state;
         e.preventDefault();
-        //doSignInWithEmailAndPassword(email, password);
         fire.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
-                // fire.firestore().collection("users").doc(user.user.uid).get()
-                //     .then( qs => console.log(qs.data()))
                 this.setState({ ...INITIAL_STATE });
                 history.push('/');
             })
-            .catch(error => this.setState({error}))
-
+            .catch(error => this.setState({ error }))
     }
     render() {
         const { email, password, error } = this.state;
@@ -58,31 +46,33 @@ class SignIn extends Component {
             password === '' ||
             email === '';
         return (
-            <div>
-                <button onClick={this.googleAuth}><Icon name="google" />Log In with Google</button>
-                <h2>Sign In</h2>
-                <form onSubmit={this.onSubmit}>
+            <div className="form-wrap">
+                <h2 className="loging-header">Sign In</h2>
+                <button className="google-btn" onClick={this.googleAuth}><Icon name="google" />Log In with Google</button>
+                <form onSubmit={this.onSubmit} className="form loging-form" >
                     <input
+                        className="form-item"
                         value={email}
                         onChange={event => this.setState(byPropKey('email', event.target.value))}
                         type="text"
                         placeholder="Email Address"
                     />
                     <input
+                        className="form-item"
                         value={password}
                         onChange={event => this.setState(byPropKey('password', event.target.value))}
                         type="password"
                         placeholder="Password"
                     />
-                    <button type="submit" disabled={isInvalid}>
+                    <button className="loging-submit" type="submit" disabled={isInvalid}>
                         Sign In
                     </button>
-                    <Link to="/signup">Sign Up</Link>
-                    {error && <p>{error.message}</p>}
+                    <Link to="/signup"> or Sign Up</Link>
+                    {error && <p className="error">{error.message}</p>}
                 </form>
             </div>
         );
     }
 }
 
-export default connect( mapStateToProps, mapDispatchToProps ) (SignIn);
+export default SignIn;
