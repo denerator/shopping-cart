@@ -1,28 +1,28 @@
-.container{
-    padding-top: 40px;
+.container {
+  padding-top: 40px;
 }
-.menu{
-    padding: 5px;
+.menu {
+  padding: 5px;
 }
-.ui.grid.wrapper{
-    padding-top: 35px;
+.ui.grid.wrapper {
+  padding-top: 35px;
 }
 .sidebar {
-    width: 200px !important;
+  width: 200px !important;
 }
 .sidebar input {
-    padding: 3px 5px !important;
+  padding: 3px 5px !important;
 }
 .sidebar i {
-    top: 6px !important;
+  top: 6px !important;
 }
 .sidebar-header {
-    margin-bottom: 20px;
-    font-size: 1.2em;
+  margin-bottom: 20px;
+  font-size: 1.2em;
 }
 .main-content {
-    min-height: 100vh !important;
+  min-height: 100vh !important;
 }
 .input-container {
-    padding: 0 !important;
+  padding: 0 !important;
 }

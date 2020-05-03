@@ -1,42 +1,42 @@
 .form-wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 100px);
 }
 .loging-submit {
-    margin: 15px;
-    box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5;
-    width: 80%;
-    padding: 10px 15px;
+  margin: 15px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  width: 80%;
+  padding: 10px 15px;
 }
 .loging-header {
-    margin-bottom: 37px;
+  margin-bottom: 37px;
 }
 .error {
-    margin: 20px;
-    padding: 20px;
-    border-radius: .28571429rem;
-    box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 0.28571429rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
 }
 .google-btn {
-    background-color: #4285f4;
-    color: #fff;
-    padding: 13px 16px ;
-    font-size: 1.1em;
+  background-color: #4285f4;
+  color: #fff;
+  padding: 13px 16px;
+  font-size: 1.1em;
 }
 .google-btn:hover {
-    box-shadow: 0 0 3px 3px rgba(66,133,244,.3);
+  box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.3);
 }
-@media screen and ( min-width: 585px ) {
-    .loging-form {
-        width: 40%;
-    }
-} 
-@media screen and ( max-width: 825px ) {
-    .loging-form {
-        width: 85%;
-    }
-} 
+@media screen and (min-width: 585px) {
+  .loging-form {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 825px) {
+  .loging-form {
+    width: 85%;
+  }
+}

@@ -39,7 +39,7 @@
     "deploy": "gh-pages -d build",
     "serve": "serve -s build"
   },
-  "homepage": "http://antontim4enko.github.io",
+  "homepage": "http://denerator.github.io",
   "devDependencies": {
     "gh-pages": "^2.0.0"
   }

@@ -1,21 +1,69 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends" : "airbnb",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
+  "extends": ["airbnb", "prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "react/destructuring-assignment": [
+      "enabled",
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+    "react/jsx-one-expression-per-line": [
+      0,
+      {
+        "allow": "single-child"
+      }
+    ],
+    "lines-between-class-members": [0, "always"],
+    "react/jsx-indent": [0, 2],
+    "arrow-body-style": [0, "never"],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "react/no-array-index-key": "never",
+    "jsx-a11y/click-events-have-key-events": "never",
+    "object-curly-newline": [
+      0,
+      {
+        "ObjectExpression": "always",
+        "ObjectPattern": {
+          "multiline": true
         },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": ["react"],
-    "rules": {
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+        "ImportDeclaration": "never",
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 3
+        }
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "always",
+        "functions": "ignore"
+      }
+    ],
+    "react/jsx-no-bind": [
+      false,
+      {
+        "ignoreDOMComponents": false,
+        "ignoreRefs": false,
+        "allowArrowFunctions": false,
+        "allowFunctions": false,
+        "allowBind": false
+      }
+    ]
+  }
 }

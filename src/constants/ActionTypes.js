@@ -1,13 +1,13 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const SET_ITEMS = 'SET_ITEMS';
 export const LOADING_ITEMS = 'LOADING_ITEMS';
-export const SUCCES = 'SUCCES';
+export const SUCCESS = 'SUCCESS';
 export const SET_FILTER = 'SET_FITLER';
 export const SET_SEARCH = 'SET_SEARCH';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 export const FETCHING_IP = 'FETCHING_IP';
 export const SET_LANG = 'SET_LANG';
-export const SET_USER ='SET_USER';
+export const SET_USER = 'SET_USER';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SET_SIDEBAR_STATE = 'SET_SIDEBAR_STATE';

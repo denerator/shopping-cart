@@ -6,13 +6,11 @@ import user from './userReducer';
 import language from './languageReducer';
 import sidebar from './sideBarReducer';
 
-
 export default combineReducers({
-    items,
-    filter,
-    cart,
-    user,
-    language,
-    sidebar
-}); 
-
+  items,
+  filter,
+  cart,
+  user,
+  language,
+  sidebar,
+});

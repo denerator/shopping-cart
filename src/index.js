@@ -21,20 +21,22 @@ import RU from 'react-intl/locale-data/ru';
 addLocaleData(EN);
 addLocaleData(RU);
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
-	<Provider store={store} >
-		<Router history={history}>
-			<Switch>
-				<Route exact path='/' component={App} />
-				<Route path='/item/:itemId' component={ItemInfo} />
-				<Route path='/signin' component={SignIn} />
-				<Route path='/signup' component={SignUp} />
-				<Route path='/*' component={NotFound} />
-			</Switch>
-		</Router>
-	</Provider>,
-		document.getElementById('root')
-	);
+  <Provider store={store}>
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route path="/item/:itemId" component={ItemInfo} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/*" component={NotFound} />
+      </Switch>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);
