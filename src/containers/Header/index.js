@@ -118,12 +118,12 @@ class Header extends React.Component {
               </button>
               |
               <button
-                className={lang === 'RU' ? 'active' : ''}
-                onClick={() => this.setLang('RU')}
-                name="RU"
-                active={lang === 'RU'}
+                className={lang === 'UA' ? 'active' : ''}
+                onClick={() => this.setLang('UA')}
+                name="UA"
+                active={lang === 'UA'}
               >
-                RU
+                UA
               </button>
             </div>
             <div className="auth">
