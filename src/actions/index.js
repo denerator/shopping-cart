@@ -54,9 +54,8 @@ export const fetchIP = () => (dispatch) => {
       dispatch({
         type: `${FETCHING_IP}_${SUCCESS}`,
         payload:
-          response.country_name === 'Ukraine' ||
-          response.country_name === 'Russia'
-            ? 'RU'
+          response.country_name === 'Ukraine'
+            ? 'UA'
             : 'EN',
       })
     )

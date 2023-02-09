@@ -141,7 +141,7 @@ class Header extends React.Component {
           </Responsive>
           <div className="cart">
             <div className="total">
-              {total} <Icon name={lang === 'RU' ? 'rub' : 'dollar'} />
+              {total} <Icon name={lang === 'UA' ? 'uah' : 'dollar'} />
             </div>
             <Popup
               trigger={

@@ -28,8 +28,8 @@ const ShopItem = ({
           <span className="date">{category}</span>
         </Card.Meta>
         <Card.Description>
-          {lang === 'RU' ? price * 66 : price}
-          <Icon name={lang === 'RU' ? 'rub' : 'dollar'} />
+          {lang === 'UA' ? price * 36 : price}
+          <Icon name={lang === 'UA' ? 'uah' : 'dollar'} />
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

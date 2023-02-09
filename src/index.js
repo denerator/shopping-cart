@@ -16,10 +16,10 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { addLocaleData } from 'react-intl';
 import EN from 'react-intl/locale-data/en';
-import RU from 'react-intl/locale-data/ru';
+import UA from 'react-intl/locale-data/ua';
 
 addLocaleData(EN);
-addLocaleData(RU);
+addLocaleData(UA);
 
 const store = createStore(
   rootReducer,
